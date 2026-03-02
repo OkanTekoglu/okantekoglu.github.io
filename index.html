@@ -480,10 +480,10 @@
 
 <div class="tabs-wrapper">
   <nav class="tab-nav">
-    <button class="tab-btn active" onclick="switchTab('about', this)">About</button>
-    <button class="tab-btn" onclick="switchTab('projects', this)">Projects</button>
-    <button class="tab-btn" onclick="switchTab('experience', this)">Experience</button>
-    <button class="tab-btn" onclick="switchTab('skills', this)">Skills</button>
+    <button class="tab-btn active" data-tab="about">About</button>
+    <button class="tab-btn" data-tab="projects">Projects</button>
+    <button class="tab-btn" data-tab="experience">Experience</button>
+    <button class="tab-btn" data-tab="skills">Skills</button>
   </nav>
 
   <!-- ABOUT -->
@@ -766,7 +766,18 @@
   <span>Okan Tekoğlu · <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="610e0a000f15040a0e060d14505121060c00080d4f020e0c">[email&#160;protected]</a></span>
   <span>Istanbul, Türkiye</span>
 </footer>
-
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-  function switchTab(id, btn) {
-    document.querySelec
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.tab-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var id = btn.getAttribute('data-tab');
+        document.querySelectorAll('.tab-panel').forEach(function(p) { p.classList.remove('active'); });
+        document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+        document.getElementById('tab-' + id).classList.add('active');
+        btn.classList.add('active');
+      });
+    });
+  });
+</script>
+</body>
+</html>
