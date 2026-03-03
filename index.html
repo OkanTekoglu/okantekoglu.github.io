@@ -4,853 +4,962 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Okan Tekoğlu</title>
-<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@300;400&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #f7f5f0;
-    --white: #ffffff;
-    --ink: #1a1814;
-    --ink2: #3d3a35;
-    --muted: #8c8880;
-    --rule: #ddd9d2;
-    --accent: #1a3a5c;
-    --accent-light: #e8eff6;
-    --gold: #b8860b;
-    --hover-bg: #f0ede8;
+    --ink:    #0e0c0a;
+    --cream:  #f2ede4;
+    --paper:  #e8e0d0;
+    --rust:   #c0392b;
+    --rust2:  #922b21;
+    --sand:   #d4c5a9;
+    --mid:    #6b6256;
+    --rule:   #c8bfb0;
   }
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+  html { scroll-behavior: smooth; }
 
   body {
-    background: var(--bg);
+    background: var(--cream);
     color: var(--ink);
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 300;
-    min-height: 100vh;
+    font-family: 'Libre Baskerville', Georgia, serif;
+    overflow-x: hidden;
   }
 
-  /* ── LAYOUT ── */
-  .wrapper {
-    max-width: 1080px;
+  /* ── MASTHEAD ─────────────────────────────── */
+  .masthead {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: var(--ink);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 48px;
+    height: 48px;
+  }
+
+  .masthead-title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--cream);
+  }
+
+  .masthead-nav {
+    display: flex;
+    gap: 0;
+  }
+
+  .masthead-nav a {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--sand);
+    text-decoration: none;
+    padding: 0 18px;
+    border-left: 1px solid #2a2520;
+    line-height: 48px;
+    transition: color 0.15s, background 0.15s;
+  }
+  .masthead-nav a:hover { color: var(--cream); background: #1e1a16; }
+  .masthead-nav a.cta { color: var(--rust); }
+  .masthead-nav a.cta:hover { background: var(--rust); color: #fff; }
+
+  /* ── HERO ─────────────────────────────────── */
+  .hero {
+    margin-top: 48px;
+    min-height: calc(100vh - 48px);
+    display: grid;
+    grid-template-columns: 1fr 520px;
+    grid-template-rows: 1fr auto;
+  }
+
+  .hero-left {
+    background: var(--ink);
+    padding: 80px 64px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .hero-overline {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--rust);
+    margin-bottom: 40px;
+  }
+
+  .hero-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(100px, 14vw, 180px);
+    line-height: 0.88;
+    letter-spacing: 0.01em;
+    color: var(--cream);
+  }
+
+  .hero-name .line2 {
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--rust);
+  }
+
+  .hero-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-top: 1px solid #2a2520;
+    padding-top: 32px;
+    margin-top: 40px;
+  }
+
+  .hero-desc {
+    font-size: 15px;
+    line-height: 1.75;
+    color: var(--sand);
+    max-width: 460px;
+    font-style: italic;
+  }
+
+  .hero-scroll-hint {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--mid);
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+  }
+
+  .hero-right {
+    background: var(--rust);
+    padding: 80px 52px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .hero-stat-block {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .hero-stat {}
+  .hero-stat-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 64px;
+    line-height: 1;
+    color: var(--cream);
+    letter-spacing: 0.02em;
+  }
+  .hero-stat-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(242,237,228,0.55);
+    margin-top: 4px;
+  }
+
+  .hero-right-bottom {
+    border-top: 1px solid rgba(255,255,255,0.2);
+    padding-top: 28px;
+  }
+
+  .hero-location {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: rgba(242,237,228,0.6);
+    margin-bottom: 8px;
+  }
+  .hero-uni {
+    font-family: 'Libre Baskerville', serif;
+    font-style: italic;
+    font-size: 15px;
+    color: var(--cream);
+  }
+
+  /* ── DIVIDER STRIP ─────────────────────── */
+  .strip {
+    background: var(--ink);
+    overflow: hidden;
+    height: 44px;
+    display: flex;
+    align-items: center;
+  }
+
+  .strip-track {
+    display: flex;
+    gap: 0;
+    animation: ticker 20s linear infinite;
+    white-space: nowrap;
+  }
+
+  .strip-item {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--sand);
+    padding: 0 32px;
+    border-right: 1px solid #2a2520;
+  }
+  .strip-item.accent { color: var(--rust); }
+
+  @keyframes ticker {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
+  /* ── SECTION BASE ─────────────────────── */
+  section { padding: 96px 0; }
+
+  .section-wrapper {
+    max-width: 1200px;
     margin: 0 auto;
     padding: 0 48px;
   }
 
-  /* ── TOP BAR ── */
-  .topbar {
-    border-bottom: 1px solid var(--rule);
-    padding: 18px 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .topbar-name {
-    font-family: 'EB Garamond', serif;
-    font-size: 17px;
-    font-weight: 600;
-    letter-spacing: 0.02em;
-    color: var(--ink);
-  }
-
-  .topbar-links {
-    display: flex;
-    gap: 28px;
-  }
-
-  .topbar-links a {
-    font-size: 12px;
-    font-weight: 400;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--muted);
-    text-decoration: none;
-    transition: color 0.15s;
-  }
-  .topbar-links a:hover { color: var(--accent); }
-
-  /* ── HERO ── */
-  .hero {
-    padding: 80px 0 72px;
-    border-bottom: 1px solid var(--rule);
+  .section-header {
     display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 48px;
-    align-items: end;
+    grid-template-columns: auto 1fr;
+    gap: 32px;
+    align-items: center;
+    margin-bottom: 64px;
   }
 
-  .hero-left h1 {
-    font-family: 'EB Garamond', serif;
-    font-size: clamp(52px, 6vw, 80px);
-    font-weight: 400;
-    line-height: 1.0;
-    letter-spacing: -0.02em;
+  .section-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 80px;
+    line-height: 1;
+    color: var(--paper);
+    letter-spacing: 0.02em;
+  }
+
+  .section-title-block {}
+  .section-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--rust);
+    margin-bottom: 6px;
+  }
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 52px;
+    letter-spacing: 0.03em;
     color: var(--ink);
-    margin-bottom: 20px;
+    line-height: 1;
   }
 
-  .hero-left h1 em {
-    font-style: italic;
-    color: var(--accent);
-  }
+  /* ── ABOUT ─────────────────────────────── */
+  #about { background: var(--cream); }
 
-  .hero-desc {
-    font-size: 16px;
-    font-weight: 300;
-    line-height: 1.75;
-    color: var(--ink2);
-    max-width: 560px;
-  }
-
-  .hero-right {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    align-items: flex-end;
-    padding-bottom: 6px;
-  }
-
-  .hero-meta {
-    font-size: 12px;
-    font-weight: 400;
-    letter-spacing: 0.06em;
-    color: var(--muted);
-    text-align: right;
-  }
-
-  .hero-cta {
-    display: inline-block;
-    margin-top: 8px;
-    background: var(--accent);
-    color: #fff;
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    text-decoration: none;
-    padding: 10px 20px;
-    transition: background 0.15s;
-  }
-  .hero-cta:hover { background: #0f2540; }
-
-  /* ── NAV ── */
-  .nav {
-    display: flex;
-    gap: 0;
-    border-bottom: 1px solid var(--rule);
-    padding-top: 2px;
-  }
-
-  .nav-btn {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 12px;
-    font-weight: 400;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--muted);
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 18px 28px 18px 0;
-    margin-right: 8px;
-    position: relative;
-    transition: color 0.15s;
-  }
-  .nav-btn::after {
-    content: '';
-    position: absolute;
-    bottom: 0; left: 0;
-    width: 100%;
-    height: 2px;
-    background: var(--accent);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.2s ease;
-  }
-  .nav-btn.active { color: var(--accent); font-weight: 500; }
-  .nav-btn.active::after { transform: scaleX(0.6); }
-  .nav-btn:hover { color: var(--ink2); }
-
-  /* ── PANELS ── */
-  .panel { display: none; padding: 56px 0 80px; }
-  .panel.active { display: block; }
-
-  /* ── ABOUT ── */
   .about-grid {
     display: grid;
-    grid-template-columns: 5fr 3fr;
+    grid-template-columns: 3fr 2fr;
     gap: 80px;
     align-items: start;
   }
 
-  .about-body p {
-    font-size: 16px;
-    font-weight: 300;
-    line-height: 1.85;
-    color: var(--ink2);
-    margin-bottom: 22px;
+  .about-text p {
+    font-size: 16.5px;
+    line-height: 1.9;
+    color: #2a2420;
+    margin-bottom: 24px;
   }
-  .about-body strong { font-weight: 500; color: var(--ink); }
+  .about-text p strong {
+    font-weight: 700;
+    color: var(--ink);
+  }
 
-  .about-aside { display: flex; flex-direction: column; gap: 36px; }
+  .about-pull {
+    font-family: 'Libre Baskerville', serif;
+    font-style: italic;
+    font-size: 22px;
+    line-height: 1.6;
+    color: var(--rust);
+    border-left: 3px solid var(--rust);
+    padding-left: 24px;
+    margin: 36px 0;
+  }
 
-  .aside-block {}
-  .aside-label {
+  .about-sidebar {}
+  .sidebar-block {
+    border-top: 2px solid var(--ink);
+    padding-top: 20px;
+    margin-bottom: 36px;
+  }
+  .sidebar-block-label {
+    font-family: 'IBM Plex Mono', monospace;
     font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 0.15em;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 14px;
-    padding-bottom: 8px;
-    border-bottom: 1px solid var(--rule);
-  }
-
-  .aside-edu-item {
+    color: var(--mid);
     margin-bottom: 16px;
   }
-  .aside-edu-degree {
-    font-family: 'EB Garamond', serif;
-    font-size: 16px;
-    font-weight: 600;
+  .sidebar-edu-item { margin-bottom: 18px; }
+  .sidebar-edu-degree {
+    font-family: 'Libre Baskerville', serif;
+    font-weight: 700;
+    font-size: 14px;
     color: var(--ink);
     line-height: 1.3;
   }
-  .aside-edu-school {
-    font-size: 12px;
-    font-weight: 400;
-    color: var(--muted);
-    margin-top: 2px;
+  .sidebar-edu-school {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--mid);
+    margin-top: 3px;
   }
-  .aside-edu-note {
-    font-size: 12px;
+  .sidebar-edu-note {
+    font-size: 12.5px;
     font-style: italic;
-    color: var(--accent);
+    color: var(--rust);
     margin-top: 4px;
   }
 
-  .focus-tags { display: flex; flex-wrap: wrap; gap: 6px; }
-  .focus-tag {
-    font-size: 11px;
-    font-weight: 400;
-    color: var(--ink2);
-    background: var(--white);
+  .focus-wrap { display: flex; flex-wrap: wrap; gap: 6px; }
+  .focus-chip {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink);
     border: 1px solid var(--rule);
-    padding: 4px 10px;
-    transition: border-color 0.15s, color 0.15s;
+    padding: 5px 10px;
+    background: var(--paper);
+    transition: background 0.15s, border-color 0.15s;
   }
-  .focus-tag:hover { border-color: var(--accent); color: var(--accent); }
+  .focus-chip:hover { background: var(--ink); color: var(--cream); border-color: var(--ink); }
 
-  .cert-list { list-style: none; display: flex; flex-direction: column; gap: 7px; }
-  .cert-list li {
-    font-size: 12.5px;
-    font-weight: 300;
-    color: var(--ink2);
-    padding-left: 14px;
-    position: relative;
-  }
-  .cert-list li::before {
-    content: '—';
-    position: absolute;
-    left: 0;
-    color: var(--rule);
+  /* ── PROJECTS ──────────────────────────── */
+  #projects { background: var(--ink); padding: 96px 0; }
+  #projects .section-num { color: #1e1a16; }
+  #projects .section-title { color: var(--cream); }
+  #projects .section-label { color: var(--rust); }
+
+  .projects-note {
+    font-family: 'IBM Plex Mono', monospace;
     font-size: 11px;
-  }
-
-  /* ── PROJECTS ── */
-  .projects-intro {
-    font-size: 13px;
-    font-weight: 400;
-    color: var(--muted);
-    letter-spacing: 0.04em;
-    margin-bottom: 36px;
+    letter-spacing: 0.1em;
+    color: var(--mid);
+    margin-bottom: 40px;
     font-style: italic;
   }
 
   .project-row {
-    border-top: 1px solid var(--rule);
-    background: var(--white);
+    border-top: 1px solid #2a2520;
     transition: background 0.15s;
   }
-  .project-row:last-child { border-bottom: 1px solid var(--rule); }
+  .project-row:last-child { border-bottom: 1px solid #2a2520; }
 
   .project-summary {
     display: grid;
-    grid-template-columns: 2fr 1fr auto;
-    gap: 24px;
+    grid-template-columns: 56px 1fr auto auto;
+    gap: 28px;
     align-items: center;
-    padding: 24px 28px;
+    padding: 26px 0;
     cursor: pointer;
     user-select: none;
-    transition: background 0.15s;
   }
-  .project-row:hover .project-summary { background: var(--hover-bg); }
+  .project-row:hover .project-summary { background: #161210; }
 
-  .project-name {
-    font-family: 'EB Garamond', serif;
-    font-size: 20px;
-    font-weight: 600;
-    color: var(--ink);
+  .proj-index {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    color: #2a2520;
+    letter-spacing: 0.05em;
+  }
+
+  .proj-name {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 19px;
+    font-weight: 700;
+    color: var(--cream);
     line-height: 1.2;
   }
-
-  .project-tagline {
+  .proj-tagline {
     font-size: 12.5px;
-    font-weight: 300;
-    color: var(--muted);
+    font-style: italic;
+    color: var(--mid);
     margin-top: 3px;
   }
 
-  .project-domain-pill {
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.08em;
+  .proj-domain {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: var(--accent);
-    background: var(--accent-light);
+    color: var(--rust);
+    border: 1px solid #3a2520;
     padding: 5px 12px;
-    text-align: center;
-    justify-self: start;
-  }
-
-  .project-toggle {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--muted);
     white-space: nowrap;
   }
 
-  .toggle-icon {
-    width: 20px;
-    height: 20px;
-    border: 1px solid var(--rule);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 14px;
-    color: var(--accent);
-    transition: transform 0.25s ease;
-    flex-shrink: 0;
+  .proj-toggle {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    color: #3a3530;
+    transition: color 0.2s, transform 0.3s;
+    width: 36px;
+    text-align: center;
   }
-  .project-row.open .toggle-icon { transform: rotate(45deg); }
+  .project-row.open .proj-toggle { color: var(--rust); transform: rotate(45deg); }
 
-  /* Expandable detail */
-  .project-detail {
+  /* Detail expand */
+  .proj-detail {
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.35s ease;
+    transition: max-height 0.4s cubic-bezier(0.4,0,0.2,1);
   }
-  .project-row.open .project-detail { max-height: 600px; }
+  .project-row.open .proj-detail { max-height: 500px; }
 
-  .project-detail-inner {
-    padding: 0 28px 28px;
+  .proj-detail-inner {
+    padding: 0 0 36px 84px;
     display: grid;
     grid-template-columns: 3fr 2fr;
-    gap: 40px;
-    border-top: 1px solid var(--rule);
-    padding-top: 24px;
-    margin-top: 0;
+    gap: 48px;
+    border-top: 1px solid #1e1a16;
+    padding-top: 28px;
   }
 
-  .detail-desc {
+  .proj-desc {
     font-size: 14.5px;
-    font-weight: 300;
     line-height: 1.8;
-    color: var(--ink2);
+    color: var(--sand);
+    font-style: italic;
     margin-bottom: 20px;
   }
 
-  .detail-doc-link {
+  .proj-doc-link {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--accent);
-    text-decoration: none;
-    border: 1px solid var(--accent);
-    padding: 8px 16px;
-    transition: background 0.15s, color 0.15s;
-  }
-  .detail-doc-link:hover { background: var(--accent); color: #fff; }
-  .detail-doc-link.soon {
-    color: var(--muted);
-    border-color: var(--rule);
-    pointer-events: none;
-  }
-
-  .detail-meta {}
-  .detail-meta-label {
+    gap: 10px;
+    font-family: 'IBM Plex Mono', monospace;
     font-size: 10px;
-    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--cream);
+    text-decoration: none;
+    border: 1px solid #3a3530;
+    padding: 9px 18px;
+    transition: background 0.15s, border-color 0.15s;
+  }
+  .proj-doc-link:hover { background: var(--rust); border-color: var(--rust); }
+  .proj-doc-link.soon { color: #3a3530; border-color: #2a2520; pointer-events: none; }
+
+  .proj-stack-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 10px;
-  }
-  .detail-stack { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
-  .stack-chip {
-    font-size: 11px;
-    font-weight: 400;
-    color: var(--ink2);
-    background: var(--bg);
-    border: 1px solid var(--rule);
-    padding: 4px 9px;
-  }
-
-  /* ── EXPERIENCE ── */
-  .exp-grid { display: flex; flex-direction: column; gap: 0; }
-
-  .exp-row {
-    display: grid;
-    grid-template-columns: 180px 1fr;
-    gap: 40px;
-    padding: 32px 0;
-    border-bottom: 1px solid var(--rule);
-  }
-  .exp-row:first-child { border-top: 1px solid var(--rule); }
-
-  .exp-left {}
-  .exp-date {
-    font-size: 11px;
-    font-weight: 400;
-    letter-spacing: 0.06em;
-    color: var(--muted);
-    text-transform: uppercase;
-    margin-bottom: 6px;
-  }
-  .exp-company-name {
-    font-family: 'EB Garamond', serif;
-    font-size: 17px;
-    font-weight: 600;
-    color: var(--ink);
-    line-height: 1.2;
-  }
-  .exp-industry {
-    font-size: 11.5px;
-    font-weight: 300;
-    color: var(--muted);
-    margin-top: 3px;
-  }
-
-  .exp-right {}
-  .exp-role-title {
-    font-size: 15px;
-    font-weight: 500;
-    color: var(--ink);
+    color: var(--mid);
     margin-bottom: 12px;
   }
-  .exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 8px; }
-  .exp-bullets li {
-    font-size: 14px;
-    font-weight: 300;
-    line-height: 1.7;
-    color: var(--ink2);
-    padding-left: 18px;
-    position: relative;
-  }
-  .exp-bullets li::before {
-    content: '–';
-    position: absolute;
-    left: 0;
-    color: var(--muted);
+  .proj-stack { display: flex; flex-wrap: wrap; gap: 7px; }
+  .proj-chip {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--sand);
+    border: 1px solid #2a2520;
+    padding: 4px 10px;
+    background: #161210;
   }
 
-  /* ── SKILLS ── */
-  .skills-grid {
+  /* ── EXPERIENCE ─────────────────────────── */
+  #experience { background: var(--paper); }
+
+  .exp-list { display: flex; flex-direction: column; }
+
+  .exp-item {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: 0;
+    border-top: 1px solid var(--rule);
+    transition: background 0.15s;
+  }
+  .exp-item:last-child { border-bottom: 1px solid var(--rule); }
+  .exp-item:hover { background: rgba(192,57,43,0.04); }
+
+  .exp-left-col {
+    padding: 32px 40px 32px 0;
+    border-right: 1px solid var(--rule);
+  }
+
+  .exp-date {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--mid);
+    margin-bottom: 10px;
+  }
+  .exp-co {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 30px;
+    letter-spacing: 0.04em;
+    color: var(--ink);
+    line-height: 1;
+  }
+  .exp-sector {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--mid);
+    margin-top: 5px;
+    letter-spacing: 0.08em;
+  }
+
+  .exp-right-col { padding: 32px 0 32px 40px; }
+  .exp-role {
+    font-family: 'Libre Baskerville', serif;
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--ink);
+    margin-bottom: 14px;
+  }
+  .exp-bul { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+  .exp-bul li {
+    font-size: 13.5px;
+    line-height: 1.7;
+    color: #4a4035;
+    padding-left: 20px;
+    position: relative;
+  }
+  .exp-bul li::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 10px;
+    width: 6px; height: 1px;
+    background: var(--rust);
+  }
+
+  /* ── SKILLS ─────────────────────────────── */
+  #skills { background: var(--rust); padding: 96px 0; }
+  #skills .section-num { color: var(--rust2); }
+  #skills .section-title { color: var(--cream); }
+  #skills .section-label { color: rgba(242,237,228,0.5); }
+
+  .skills-columns {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 1px;
-    background: var(--rule);
-    border: 1px solid var(--rule);
+    background: rgba(0,0,0,0.15);
   }
 
-  .skill-cell {
-    background: var(--white);
-    padding: 28px 30px;
+  .skill-col {
+    background: var(--rust);
+    padding: 36px 32px;
   }
 
-  .skill-cell-label {
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 18px;
+  .skill-col-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 0.05em;
+    color: var(--cream);
+    margin-bottom: 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+    padding-bottom: 12px;
   }
 
-  .skill-items { display: flex; flex-direction: column; gap: 8px; }
-  .skill-item {
-    font-size: 13.5px;
-    font-weight: 300;
-    color: var(--ink2);
+  .skill-col ul {
+    list-style: none;
     display: flex;
-    align-items: center;
-    gap: 8px;
+    flex-direction: column;
+    gap: 9px;
   }
-  .skill-item::before {
-    content: '';
-    width: 3px;
-    height: 3px;
-    background: var(--accent);
-    border-radius: 50%;
-    flex-shrink: 0;
+  .skill-col ul li {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: rgba(242,237,228,0.7);
+    padding-left: 14px;
+    position: relative;
+  }
+  .skill-col ul li::before {
+    content: '›';
+    position: absolute;
+    left: 0;
+    color: rgba(242,237,228,0.35);
   }
 
-  /* ── FOOTER ── */
-  .footer {
-    border-top: 1px solid var(--rule);
-    padding: 24px 0;
+  /* ── FOOTER ─────────────────────────────── */
+  .footer-bar {
+    background: var(--ink);
+    padding: 32px 48px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
   }
 
-  .footer-left {
-    font-size: 12px;
-    font-weight: 300;
-    color: var(--muted);
+  .footer-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    letter-spacing: 0.05em;
+    color: var(--cream);
   }
 
-  .footer-right {
-    font-family: 'EB Garamond', serif;
-    font-size: 13px;
-    font-style: italic;
-    color: var(--muted);
+  .footer-links { display: flex; gap: 28px; }
+  .footer-links a {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--mid);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+  .footer-links a:hover { color: var(--cream); }
+
+  .footer-copy {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    color: #2a2520;
   }
 
-  /* ── ANIMATIONS ── */
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(8px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  .hero { animation: fadeIn 0.5s ease forwards; }
-  .panel.active { animation: fadeIn 0.3s ease forwards; }
-
-  /* ── RESPONSIVE ── */
-  @media (max-width: 720px) {
-    .wrapper { padding: 0 20px; }
-    .hero { grid-template-columns: 1fr; }
-    .hero-right { align-items: flex-start; }
-    .about-grid { grid-template-columns: 1fr; }
-    .project-summary { grid-template-columns: 1fr auto; }
-    .project-domain-pill { display: none; }
-    .project-detail-inner { grid-template-columns: 1fr; }
-    .exp-row { grid-template-columns: 1fr; gap: 12px; }
-    .skills-grid { grid-template-columns: 1fr 1fr; }
-    .footer { flex-direction: column; gap: 8px; text-align: center; }
+  /* ── RESPONSIVE ──────────────────────────── */
+  @media (max-width: 800px) {
+    .hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-right { padding: 48px; }
+    .about-grid { grid-template-columns: 1fr; gap: 48px; }
+    .proj-detail-inner { grid-template-columns: 1fr; padding-left: 0; }
+    .project-summary { grid-template-columns: 40px 1fr auto; }
+    .proj-domain { display: none; }
+    .exp-item { grid-template-columns: 1fr; }
+    .exp-left-col { border-right: none; border-bottom: 1px solid var(--rule); padding: 24px 0; }
+    .skills-columns { grid-template-columns: 1fr; }
+    .masthead { padding: 0 20px; }
+    .section-wrapper { padding: 0 24px; }
   }
 </style>
 </head>
 <body>
 
-<div class="wrapper">
-
-  <!-- TOP BAR -->
-  <div class="topbar">
-    <span class="topbar-name">Okan Tekoğlu</span>
-    <nav class="topbar-links">
-      <a href="https://github.com/okantekoglu" target="_blank">GitHub</a>
-      <a href="https://linkedin.com/in/okantekoglu" target="_blank">LinkedIn</a>
-      <a href="Okan_Tekoglu_CV.pdf" target="_blank">Download CV</a>
-      <a href="mailto:okantekoglu10@gmail.com">Contact</a>
-    </nav>
-  </div>
-
-  <!-- HERO -->
-  <div class="hero">
-    <div class="hero-left">
-      <h1>Okan<br><em>Tekoğlu</em></h1>
-      <p class="hero-desc">
-        Mathematical Engineering student with a focus on data science, financial analysis, and management science. I work at the intersection of rigorous quantitative methods and real-world business problems.
-      </p>
-    </div>
-    <div class="hero-right">
-      <span class="hero-meta">Yıldız Technical University</span>
-      <span class="hero-meta">Istanbul, Türkiye</span>
-      <span class="hero-meta">Expected graduation: June 2026</span>
-      <a href="Okan_Tekoglu_CV.pdf" class="hero-cta" target="_blank">↓ Download CV</a>
-    </div>
-  </div>
-
-  <!-- NAV -->
-  <nav class="nav">
-    <button class="nav-btn active" data-tab="about">About</button>
-    <button class="nav-btn" data-tab="projects">Projects</button>
-    <button class="nav-btn" data-tab="experience">Experience</button>
-    <button class="nav-btn" data-tab="skills">Skills</button>
+<!-- MASTHEAD -->
+<header class="masthead">
+  <span class="masthead-title">Okan Tekoğlu — Portfolio</span>
+  <nav class="masthead-nav">
+    <a href="#about">About</a>
+    <a href="#projects">Projects</a>
+    <a href="#experience">Experience</a>
+    <a href="#skills">Skills</a>
+    <a href="Okan_Tekoglu_CV.pdf" target="_blank" class="cta">↓ CV</a>
   </nav>
+</header>
 
-  <!-- ABOUT -->
-  <div id="tab-about" class="panel active">
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-left">
+    <div>
+      <div class="hero-overline">Mathematical Engineering · Istanbul, 2026</div>
+      <div class="hero-name">
+        OKAN<br>
+        <span class="line2">TEKOĞLU</span>
+      </div>
+    </div>
+    <div class="hero-bottom">
+      <p class="hero-desc">
+        Data science, financial analysis, and management science — grounded in applied mathematics, built for real-world decisions.
+      </p>
+      <span class="hero-scroll-hint">Scroll to explore</span>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-stat-block">
+      <div class="hero-stat">
+        <div class="hero-stat-num">6</div>
+        <div class="hero-stat-label">Projects on real-world data</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">3</div>
+        <div class="hero-stat-label">Industry internships</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">5+</div>
+        <div class="hero-stat-label">Years tutoring mathematics</div>
+      </div>
+    </div>
+    <div class="hero-right-bottom">
+      <div class="hero-location">Istanbul, Türkiye</div>
+      <div class="hero-uni">Yıldız Technical University</div>
+    </div>
+  </div>
+</div>
+
+<!-- TICKER STRIP -->
+<div class="strip">
+  <div class="strip-track">
+    <span class="strip-item accent">Data Science</span>
+    <span class="strip-item">Financial Analysis</span>
+    <span class="strip-item accent">Management Science</span>
+    <span class="strip-item">Data Management</span>
+    <span class="strip-item accent">Applied Mathematics</span>
+    <span class="strip-item">Stochastic Modeling</span>
+    <span class="strip-item accent">Optimization</span>
+    <span class="strip-item">Machine Learning</span>
+    <span class="strip-item accent">Explainable AI</span>
+    <span class="strip-item">Quantitative Methods</span>
+    <!-- Duplicate for seamless loop -->
+    <span class="strip-item accent">Data Science</span>
+    <span class="strip-item">Financial Analysis</span>
+    <span class="strip-item accent">Management Science</span>
+    <span class="strip-item">Data Management</span>
+    <span class="strip-item accent">Applied Mathematics</span>
+    <span class="strip-item">Stochastic Modeling</span>
+    <span class="strip-item accent">Optimization</span>
+    <span class="strip-item">Machine Learning</span>
+    <span class="strip-item accent">Explainable AI</span>
+    <span class="strip-item">Quantitative Methods</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-wrapper">
+    <div class="section-header">
+      <div class="section-num">01</div>
+      <div class="section-title-block">
+        <div class="section-label">Who I Am</div>
+        <div class="section-title">About</div>
+      </div>
+    </div>
     <div class="about-grid">
-
-      <div class="about-body">
-        <p>
-          I'm a final-year Mathematical Engineering student at Yıldız Technical University, with a strong foundation in <strong>applied mathematics, probability, and statistical modeling</strong>. My coursework spans differential equations, advanced calculus, linear algebra, optimization, and operations research — all applied toward solving real-world analytical problems.
-        </p>
-        <p>
-          My project work cuts across domains: <strong>financial modeling</strong> (portfolio optimization, macroeconomic forecasting), <strong>data management</strong> at scale (30M+ record datasets), and <strong>classification and prediction</strong> pipelines built on real-world data. I care about building analyses that are interpretable and decision-ready — not just technically correct.
-        </p>
-        <p>
-          Alongside technical work, I've gained experience in <strong>strategy and business development</strong> at Turkcell and in <strong>project management</strong> at a management consulting firm. I'm seeking roles where quantitative thinking directly drives business decisions — in data science, management science, financial analysis, or adjacent fields.
-        </p>
-
-        <div style="margin-top: 36px;">
-          <div class="detail-meta-label" style="font-size:10px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;">Areas of Focus</div>
-          <div class="focus-tags">
-            <span class="focus-tag">Data Science</span>
-            <span class="focus-tag">Data Management</span>
-            <span class="focus-tag">Management Science</span>
-            <span class="focus-tag">Financial Analysis</span>
-            <span class="focus-tag">Applied Mathematics</span>
-            <span class="focus-tag">Stochastic Modeling</span>
-            <span class="focus-tag">Quantitative Methods</span>
-            <span class="focus-tag">Machine Learning</span>
-            <span class="focus-tag">Explainable AI</span>
-            <span class="focus-tag">Optimization</span>
-          </div>
+      <div class="about-text">
+        <p>I'm a final-year Mathematical Engineering student at Yıldız Technical University, with a deep foundation in <strong>probability, differential equations, advanced calculus, and linear algebra</strong> — the mathematical infrastructure that makes good data science possible.</p>
+        <div class="about-pull">"I work at the intersection of rigorous quantitative methods and real-world business problems."</div>
+        <p>My project work spans <strong>financial modeling</strong> (portfolio optimization via reinforcement learning, macroeconomic forecasting with fuzzy logic), <strong>large-scale data management</strong> (30M+ record pipelines), and end-to-end <strong>classification and prediction systems</strong> — all on real datasets, not synthetic ones.</p>
+        <p>Beyond technical work, I've gained direct exposure to <strong>strategy, business development, and management consulting</strong> — at Turkcell and TNC Group. I understand that models exist to support decisions, and I build with that in mind.</p>
+        <div class="focus-wrap" style="margin-top:32px;">
+          <span class="focus-chip">Data Science</span>
+          <span class="focus-chip">Data Management</span>
+          <span class="focus-chip">Management Science</span>
+          <span class="focus-chip">Financial Analysis</span>
+          <span class="focus-chip">Applied Mathematics</span>
+          <span class="focus-chip">Stochastic Modeling</span>
+          <span class="focus-chip">Quantitative Methods</span>
+          <span class="focus-chip">Machine Learning</span>
+          <span class="focus-chip">Optimization</span>
         </div>
       </div>
-
-      <div class="about-aside">
-
-        <div class="aside-block">
-          <div class="aside-label">Education</div>
-          <div class="aside-edu-item">
-            <div class="aside-edu-degree">B.Sc. Mathematical Engineering</div>
-            <div class="aside-edu-school">Yıldız Technical University · 2026</div>
-            <div class="aside-edu-note">Thesis: Dynamic Portfolio Optimization via Reinforcement Learning</div>
+      <div class="about-sidebar">
+        <div class="sidebar-block">
+          <div class="sidebar-block-label">Education</div>
+          <div class="sidebar-edu-item">
+            <div class="sidebar-edu-degree">B.Sc. Mathematical Engineering</div>
+            <div class="sidebar-edu-school">Yıldız Technical University · 2026</div>
+            <div class="sidebar-edu-note">Thesis: Dynamic Portfolio Optimization via Reinforcement Learning</div>
           </div>
-          <div class="aside-edu-item">
-            <div class="aside-edu-degree">Stochastic Analysis Summer School</div>
-            <div class="aside-edu-school">CIMPA – European Mathematical Society</div>
+          <div class="sidebar-edu-item">
+            <div class="sidebar-edu-degree">Stochastic Analysis Summer School</div>
+            <div class="sidebar-edu-school">CIMPA – European Mathematical Society</div>
           </div>
-          <div class="aside-edu-item">
-            <div class="aside-edu-degree">English Language Program</div>
-            <div class="aside-edu-school">Atlas Language School · Dublin, 2023</div>
+          <div class="sidebar-edu-item">
+            <div class="sidebar-edu-degree">English Language Program</div>
+            <div class="sidebar-edu-school">Atlas Language School · Dublin, 2023</div>
           </div>
         </div>
-
-        <div class="aside-block">
-          <div class="aside-label">Certifications</div>
-          <ul class="cert-list">
-            <li>Google AI Technology Academy (2024–2025)</li>
-            <li>Google Project Management Certificate</li>
-            <li>Deep Learning — MATLAB</li>
-            <li>Google Datathon Participant</li>
-          </ul>
+        <div class="sidebar-block">
+          <div class="sidebar-block-label">Certifications & Achievements</div>
+          <div class="sidebar-edu-item">
+            <div class="sidebar-edu-school">Google AI Technology Academy (2024–2025)</div>
+          </div>
+          <div class="sidebar-edu-item">
+            <div class="sidebar-edu-school">Google Project Management Certificate</div>
+          </div>
+          <div class="sidebar-edu-item">
+            <div class="sidebar-edu-school">Deep Learning – MATLAB</div>
+          </div>
+          <div class="sidebar-edu-item">
+            <div class="sidebar-edu-school">NASA URC Finalist · Teknofest Finalist</div>
+          </div>
+          <div class="sidebar-edu-item">
+            <div class="sidebar-edu-school">Yıldız Best Award</div>
+          </div>
         </div>
-
-        <div class="aside-block">
-          <div class="aside-label">Achievements</div>
-          <ul class="cert-list">
-            <li>NASA URC Finalist — Yıldız Rover Team</li>
-            <li>Teknofest Finalist</li>
-            <li>Yıldız Best Award</li>
-            <li>Mathematics Tutor, 2021–Present</li>
-          </ul>
-        </div>
-
       </div>
     </div>
   </div>
+</section>
 
-  <!-- PROJECTS -->
-  <div id="tab-projects" class="panel">
-    <p class="projects-intro">Click any project to expand details and access documentation.</p>
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-wrapper">
+    <div class="section-header">
+      <div class="section-num">02</div>
+      <div class="section-title-block">
+        <div class="section-label">Selected Work</div>
+        <div class="section-title" style="color:var(--cream)">Projects</div>
+      </div>
+    </div>
+    <p class="projects-note">All projects conducted on real-world data. Click any row to expand details.</p>
 
-    <!-- Project 1 -->
     <div class="project-row" data-project>
       <div class="project-summary">
+        <div class="proj-index">01</div>
         <div>
-          <div class="project-name">Dynamic Portfolio Optimization via RL</div>
-          <div class="project-tagline">Applying reinforcement learning agents to real financial market data</div>
+          <div class="proj-name">Dynamic Portfolio Optimization via RL</div>
+          <div class="proj-tagline">Deep reinforcement learning on real financial market data — BSc Thesis</div>
         </div>
-        <div class="project-domain-pill">Finance · RL</div>
-        <div class="project-toggle">
-          Details <span class="toggle-icon">+</span>
-        </div>
+        <div class="proj-domain">Finance · RL</div>
+        <div class="proj-toggle">+</div>
       </div>
-      <div class="project-detail">
-        <div class="project-detail-inner">
+      <div class="proj-detail">
+        <div class="proj-detail-inner">
           <div>
-            <p class="detail-desc">BSc thesis project. Deep RL agents (PPO, DQN) are trained to dynamically optimize financial portfolio allocation under real market conditions. The agent learns rebalancing strategies by interacting with a market environment built from historical price data — optimizing risk-adjusted returns over time.</p>
-            <a href="#" class="detail-doc-link soon">Documentation coming soon</a>
+            <p class="proj-desc">PPO and DQN agents trained to dynamically optimize portfolio allocation under real market conditions. The agent learns rebalancing strategies by interacting with a market environment built from historical price data — maximizing risk-adjusted returns over time.</p>
+            <a href="#" class="proj-doc-link soon">↗ Documentation coming soon</a>
           </div>
-          <div class="detail-meta">
-            <div class="detail-meta-label">Stack</div>
-            <div class="detail-stack">
-              <span class="stack-chip">Python</span>
-              <span class="stack-chip">PyTorch</span>
-              <span class="stack-chip">PPO / DQN</span>
-              <span class="stack-chip">Financial Time Series</span>
+          <div>
+            <div class="proj-stack-label">Stack</div>
+            <div class="proj-stack">
+              <span class="proj-chip">Python</span><span class="proj-chip">PyTorch</span>
+              <span class="proj-chip">PPO / DQN</span><span class="proj-chip">Financial Time Series</span>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Project 2 -->
     <div class="project-row" data-project>
       <div class="project-summary">
+        <div class="proj-index">02</div>
         <div>
-          <div class="project-name">Inflation Modeling via Fuzzy Logic</div>
-          <div class="project-tagline">Macroeconomic forecasting without parametric assumptions</div>
+          <div class="proj-name">Inflation Modeling via Mamdani Fuzzy Logic</div>
+          <div class="proj-tagline">Macroeconomic forecasting without parametric assumptions</div>
         </div>
-        <div class="project-domain-pill">Financial Analysis</div>
-        <div class="project-toggle">
-          Details <span class="toggle-icon">+</span>
-        </div>
+        <div class="proj-domain">Financial Analysis</div>
+        <div class="proj-toggle">+</div>
       </div>
-      <div class="project-detail">
-        <div class="project-detail-inner">
+      <div class="proj-detail">
+        <div class="proj-detail-inner">
           <div>
-            <p class="detail-desc">Examined the effects of exchange rate variability, interest rates, and credit usage on inflation using a Mamdani-type Fuzzy Inference System applied to real Turkish macroeconomic data. Captured non-linear economic relationships without requiring parametric assumptions — an alternative to classical econometric approaches.</p>
-            <a href="#" class="detail-doc-link soon">Documentation coming soon</a>
+            <p class="proj-desc">Modeled the effects of exchange rate variability, interest rates, and credit usage on inflation using a Mamdani-type Fuzzy Inference System on real Turkish macroeconomic data. Captured non-linear economic relationships that standard regression cannot model.</p>
+            <a href="#" class="proj-doc-link soon">↗ Documentation coming soon</a>
           </div>
-          <div class="detail-meta">
-            <div class="detail-meta-label">Stack</div>
-            <div class="detail-stack">
-              <span class="stack-chip">Python</span>
-              <span class="stack-chip">MATLAB</span>
-              <span class="stack-chip">Mamdani Fuzzy Logic</span>
-              <span class="stack-chip">Macroeconomic Data</span>
+          <div>
+            <div class="proj-stack-label">Stack</div>
+            <div class="proj-stack">
+              <span class="proj-chip">Python</span><span class="proj-chip">MATLAB</span>
+              <span class="proj-chip">Mamdani FIS</span><span class="proj-chip">Macro Data</span>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Project 3 -->
     <div class="project-row" data-project>
       <div class="project-summary">
+        <div class="proj-index">03</div>
         <div>
-          <div class="project-name">Stress Risk Classification</div>
-          <div class="project-tagline">Predictive screening from socioeconomic and life-course data</div>
+          <div class="proj-name">Stress Risk Classification</div>
+          <div class="proj-tagline">Predictive screening from real socioeconomic & life-course data</div>
         </div>
-        <div class="project-domain-pill">Data Science</div>
-        <div class="project-toggle">
-          Details <span class="toggle-icon">+</span>
-        </div>
+        <div class="proj-domain">Data Science</div>
+        <div class="proj-toggle">+</div>
       </div>
-      <div class="project-detail">
-        <div class="project-detail-inner">
+      <div class="proj-detail">
+        <div class="proj-detail-inner">
           <div>
-            <p class="detail-desc">End-to-end binary classification pipeline built on real-world socioeconomic and life-course data. Full flow: data preprocessing, visualization, model training, evaluation, and explainability analysis using SHAP & LIME to surface the key drivers behind individual predictions.</p>
-            <a href="#" class="detail-doc-link soon">Documentation coming soon</a>
+            <p class="proj-desc">End-to-end binary classification pipeline: preprocessing, visualization, model training, evaluation, and SHAP & LIME explainability. Built to surface the key drivers behind individual predictions — making outputs actionable and interpretable.</p>
+            <a href="#" class="proj-doc-link soon">↗ Documentation coming soon</a>
           </div>
-          <div class="detail-meta">
-            <div class="detail-meta-label">Stack</div>
-            <div class="detail-stack">
-              <span class="stack-chip">Python</span>
-              <span class="stack-chip">Random Forest</span>
-              <span class="stack-chip">SHAP</span>
-              <span class="stack-chip">LIME</span>
-              <span class="stack-chip">Scikit-learn</span>
+          <div>
+            <div class="proj-stack-label">Stack</div>
+            <div class="proj-stack">
+              <span class="proj-chip">Python</span><span class="proj-chip">Random Forest</span>
+              <span class="proj-chip">SHAP</span><span class="proj-chip">LIME</span>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Project 4 -->
     <div class="project-row" data-project>
       <div class="project-summary">
+        <div class="proj-index">04</div>
         <div>
-          <div class="project-name">Mortality Prediction on Clinical Data</div>
-          <div class="project-tagline">Supervised learning pipeline on real clinical datasets</div>
+          <div class="proj-name">Mortality Prediction on Clinical Data</div>
+          <div class="proj-tagline">Supervised learning pipeline — real clinical dataset, full ML flow</div>
         </div>
-        <div class="project-domain-pill">Applied ML</div>
-        <div class="project-toggle">
-          Details <span class="toggle-icon">+</span>
-        </div>
+        <div class="proj-domain">Applied ML</div>
+        <div class="proj-toggle">+</div>
       </div>
-      <div class="project-detail">
-        <div class="project-detail-inner">
+      <div class="proj-detail">
+        <div class="proj-detail-inner">
           <div>
-            <p class="detail-desc">Full supervised learning pipeline on real clinical datasets. Covers data definition, visualization, preprocessing, feature selection, hyperparameter optimization, and model evaluation. Multiple algorithms benchmarked to maximize predictive performance for high-stakes patient outcome prediction.</p>
-            <a href="#" class="detail-doc-link soon">Documentation coming soon</a>
+            <p class="proj-desc">Full supervised learning pipeline on real clinical data: data definition, preprocessing, feature selection, hyperparameter optimization, multi-algorithm benchmarking, and evaluation. Built for high-stakes prediction where model choices have real consequences.</p>
+            <a href="#" class="proj-doc-link soon">↗ Documentation coming soon</a>
           </div>
-          <div class="detail-meta">
-            <div class="detail-meta-label">Stack</div>
-            <div class="detail-stack">
-              <span class="stack-chip">Python</span>
-              <span class="stack-chip">Scikit-learn</span>
-              <span class="stack-chip">Feature Selection</span>
-              <span class="stack-chip">Hyperparameter Optimization</span>
+          <div>
+            <div class="proj-stack-label">Stack</div>
+            <div class="proj-stack">
+              <span class="proj-chip">Python</span><span class="proj-chip">Scikit-learn</span>
+              <span class="proj-chip">Feature Selection</span>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Project 5 -->
     <div class="project-row" data-project>
       <div class="project-summary">
+        <div class="proj-index">05</div>
         <div>
-          <div class="project-name">Unsupervised Learning on Large-Scale Data</div>
-          <div class="project-tagline">Clustering and pattern extraction at scale — real-world dataset</div>
+          <div class="proj-name">Unsupervised Learning on Large-Scale Data</div>
+          <div class="proj-tagline">Clustering at scale — real-world high-dimensional dataset</div>
         </div>
-        <div class="project-domain-pill">Data Management</div>
-        <div class="project-toggle">
-          Details <span class="toggle-icon">+</span>
-        </div>
+        <div class="proj-domain">Data Management</div>
+        <div class="proj-toggle">+</div>
       </div>
-      <div class="project-detail">
-        <div class="project-detail-inner">
+      <div class="proj-detail">
+        <div class="proj-detail-inner">
           <div>
-            <p class="detail-desc">Applied K-means and DBSCAN clustering to a large-scale, high-dimensional real-world dataset. Surfaced statistically meaningful group structures to support downstream analysis and decision-making — including the full data management pipeline required to handle data at this volume.</p>
-            <a href="#" class="detail-doc-link soon">Documentation coming soon</a>
+            <p class="proj-desc">Applied K-means and DBSCAN clustering to a large-scale, high-dimensional real-world dataset. Full data management pipeline required to handle data at this volume — extraction, cleaning, dimensionality handling — before meaningful group structures could be surfaced.</p>
+            <a href="#" class="proj-doc-link soon">↗ Documentation coming soon</a>
           </div>
-          <div class="detail-meta">
-            <div class="detail-meta-label">Stack</div>
-            <div class="detail-stack">
-              <span class="stack-chip">Python</span>
-              <span class="stack-chip">K-means</span>
-              <span class="stack-chip">DBSCAN</span>
-              <span class="stack-chip">Pandas</span>
-              <span class="stack-chip">NumPy</span>
+          <div>
+            <div class="proj-stack-label">Stack</div>
+            <div class="proj-stack">
+              <span class="proj-chip">Python</span><span class="proj-chip">K-means</span>
+              <span class="proj-chip">DBSCAN</span><span class="proj-chip">Pandas</span>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Project 6 -->
     <div class="project-row" data-project>
       <div class="project-summary">
+        <div class="proj-index">06</div>
         <div>
-          <div class="project-name">Fetal MRI Image Processing Pipeline</div>
-          <div class="project-tagline">End-to-end computer vision with topological data analysis</div>
+          <div class="proj-name">Fetal MRI Image Processing Pipeline</div>
+          <div class="proj-tagline">End-to-end computer vision with topological data analysis</div>
         </div>
-        <div class="project-domain-pill">Computer Vision</div>
-        <div class="project-toggle">
-          Details <span class="toggle-icon">+</span>
-        </div>
+        <div class="proj-domain">Computer Vision</div>
+        <div class="proj-toggle">+</div>
       </div>
-      <div class="project-detail">
-        <div class="project-detail-inner">
+      <div class="proj-detail">
+        <div class="proj-detail-inner">
           <div>
-            <p class="detail-desc">End-to-end image analysis pipeline for fetal MRI clinical data: vessel-enhancing filters, cubic complex thresholding via Topological Data Analysis, point cloud investigation, CNN-based model training, and explainability via SHAP & LIME. Conducted in parallel with the FetalIST internship.</p>
-            <a href="#" class="detail-doc-link soon">Documentation coming soon</a>
+            <p class="proj-desc">Vessel-enhancing filters, cubic complex thresholding (TDA), point cloud investigation, CNN-based model training, and SHAP & LIME explainability — all on real clinical imagery. Conducted alongside the FetalIST data science internship.</p>
+            <a href="#" class="proj-doc-link soon">↗ Documentation coming soon</a>
           </div>
-          <div class="detail-meta">
-            <div class="detail-meta-label">Stack</div>
-            <div class="detail-stack">
-              <span class="stack-chip">Python</span>
-              <span class="stack-chip">CNN</span>
-              <span class="stack-chip">TDA</span>
-              <span class="stack-chip">SHAP</span>
-              <span class="stack-chip">LIME</span>
+          <div>
+            <div class="proj-stack-label">Stack</div>
+            <div class="proj-stack">
+              <span class="proj-chip">Python</span><span class="proj-chip">CNN</span>
+              <span class="proj-chip">TDA</span><span class="proj-chip">SHAP</span><span class="proj-chip">LIME</span>
             </div>
           </div>
         </div>
@@ -858,181 +967,174 @@
     </div>
 
   </div>
+</section>
 
-  <!-- EXPERIENCE -->
-  <div id="tab-experience" class="panel">
-    <div class="exp-grid">
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-wrapper">
+    <div class="section-header">
+      <div class="section-num">03</div>
+      <div class="section-title-block">
+        <div class="section-label">Work History</div>
+        <div class="section-title">Experience</div>
+      </div>
+    </div>
+    <div class="exp-list">
 
-      <div class="exp-row">
-        <div class="exp-left">
+      <div class="exp-item">
+        <div class="exp-left-col">
           <div class="exp-date">Jan 2026 – Present</div>
-          <div class="exp-company-name">Turkcell</div>
-          <div class="exp-industry">Telecommunications</div>
+          <div class="exp-co">Turkcell</div>
+          <div class="exp-sector">Telecommunications</div>
         </div>
-        <div class="exp-right">
-          <div class="exp-role-title">Strategy & Business Development Intern</div>
-          <ul class="exp-bullets">
+        <div class="exp-right-col">
+          <div class="exp-role">Strategy & Business Development Intern</div>
+          <ul class="exp-bul">
             <li>Conducted market and technology research on connectivity, satellite technologies, and digital service trends to support strategic planning.</li>
-            <li>Prepared competitive landscape summaries; performed benchmarking analyses and tracked KPIs against industry standards.</li>
+            <li>Prepared competitive landscape summaries; benchmarking analyses and KPI tracking against industry standards.</li>
           </ul>
         </div>
       </div>
 
-      <div class="exp-row">
-        <div class="exp-left">
+      <div class="exp-item">
+        <div class="exp-left-col">
           <div class="exp-date">Aug – Oct 2025</div>
-          <div class="exp-company-name">FetalIST</div>
-          <div class="exp-industry">Healthcare AI</div>
+          <div class="exp-co">FetalIST</div>
+          <div class="exp-sector">Healthcare AI</div>
         </div>
-        <div class="exp-right">
-          <div class="exp-role-title">Data Science & Analytics Intern</div>
-          <ul class="exp-bullets">
+        <div class="exp-right-col">
+          <div class="exp-role">Data Science & Analytics Intern</div>
+          <ul class="exp-bul">
             <li>Built ML pipelines for segmentation and analysis on real clinical imaging data.</li>
             <li>Designed data collection, cleaning, and preprocessing workflows for large-scale datasets with quality assurance protocols.</li>
           </ul>
         </div>
       </div>
 
-      <div class="exp-row">
-        <div class="exp-left">
+      <div class="exp-item">
+        <div class="exp-left-col">
           <div class="exp-date">Jun – Jul 2025</div>
-          <div class="exp-company-name">TNC Group</div>
-          <div class="exp-industry">Management Consulting</div>
+          <div class="exp-co">TNC Group</div>
+          <div class="exp-sector">Management Consulting</div>
         </div>
-        <div class="exp-right">
-          <div class="exp-role-title">Project Management Intern</div>
-          <ul class="exp-bullets">
+        <div class="exp-right-col">
+          <div class="exp-role">Project Management Intern</div>
+          <ul class="exp-bul">
             <li>Supported project planning, timeline tracking, and stakeholder communication across consulting engagements.</li>
           </ul>
         </div>
       </div>
 
-      <div class="exp-row">
-        <div class="exp-left">
+      <div class="exp-item">
+        <div class="exp-left-col">
           <div class="exp-date">Mar – Jun 2024</div>
-          <div class="exp-company-name">Anadolu Sigorta</div>
-          <div class="exp-industry">Insurance & Risk</div>
+          <div class="exp-co">Anadolu Sigorta</div>
+          <div class="exp-sector">Insurance & Risk</div>
         </div>
-        <div class="exp-right">
-          <div class="exp-role-title">Youth Senate Member</div>
-          <ul class="exp-bullets">
-            <li>Gained exposure to insurance industry principles and risk management frameworks through structured workshops.</li>
+        <div class="exp-right-col">
+          <div class="exp-role">Youth Senate Member</div>
+          <ul class="exp-bul">
+            <li>Gained exposure to insurance industry principles and risk management frameworks through structured workshops and seminars.</li>
           </ul>
         </div>
       </div>
 
-      <div class="exp-row">
-        <div class="exp-left">
+      <div class="exp-item">
+        <div class="exp-left-col">
           <div class="exp-date">2021 – Present</div>
-          <div class="exp-company-name">Independent</div>
-          <div class="exp-industry">Education</div>
+          <div class="exp-co">Independent</div>
+          <div class="exp-sector">Education</div>
         </div>
-        <div class="exp-right">
-          <div class="exp-role-title">Mathematics Tutor</div>
-          <ul class="exp-bullets">
-            <li>Ongoing private tutoring — translating advanced mathematical concepts into structured, accessible explanations for diverse learners.</li>
+        <div class="exp-right-col">
+          <div class="exp-role">Mathematics Tutor</div>
+          <ul class="exp-bul">
+            <li>Ongoing private tutoring — translating advanced mathematical concepts into clear, structured explanations for diverse learners.</li>
           </ul>
         </div>
       </div>
 
     </div>
   </div>
+</section>
 
-  <!-- SKILLS -->
-  <div id="tab-skills" class="panel">
-    <div class="skills-grid">
-      <div class="skill-cell">
-        <div class="skill-cell-label">Programming</div>
-        <div class="skill-items">
-          <span class="skill-item">Python</span>
-          <span class="skill-item">MATLAB</span>
-          <span class="skill-item">SQL</span>
-        </div>
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-wrapper">
+    <div class="section-header">
+      <div class="section-num">04</div>
+      <div class="section-title-block">
+        <div class="section-label">Toolkit</div>
+        <div class="section-title">Skills</div>
       </div>
-      <div class="skill-cell">
-        <div class="skill-cell-label">ML / AI</div>
-        <div class="skill-items">
-          <span class="skill-item">PyTorch</span>
-          <span class="skill-item">TensorFlow</span>
-          <span class="skill-item">Scikit-learn</span>
-          <span class="skill-item">SHAP / LIME</span>
-        </div>
+    </div>
+    <div class="skills-columns">
+      <div class="skill-col">
+        <div class="skill-col-title">Programming</div>
+        <ul>
+          <li>Python</li><li>MATLAB</li><li>SQL</li>
+        </ul>
       </div>
-      <div class="skill-cell">
-        <div class="skill-cell-label">Data & Analysis</div>
-        <div class="skill-items">
-          <span class="skill-item">NumPy · Pandas</span>
-          <span class="skill-item">Matplotlib</span>
-          <span class="skill-item">Jupyter</span>
-          <span class="skill-item">Data Management</span>
-        </div>
+      <div class="skill-col">
+        <div class="skill-col-title">ML / AI Frameworks</div>
+        <ul>
+          <li>PyTorch</li><li>TensorFlow</li><li>Scikit-learn</li><li>SHAP / LIME</li>
+        </ul>
       </div>
-      <div class="skill-cell">
-        <div class="skill-cell-label">Applied Mathematics</div>
-        <div class="skill-items">
-          <span class="skill-item">Probability Theory</span>
-          <span class="skill-item">Differential Equations</span>
-          <span class="skill-item">Advanced Calculus</span>
-          <span class="skill-item">Linear Algebra</span>
-          <span class="skill-item">Mathematical Analysis</span>
-        </div>
+      <div class="skill-col">
+        <div class="skill-col-title">Data & Analysis</div>
+        <ul>
+          <li>NumPy · Pandas</li><li>Matplotlib</li><li>Jupyter</li><li>Data Management</li>
+        </ul>
       </div>
-      <div class="skill-cell">
-        <div class="skill-cell-label">Quantitative Methods</div>
-        <div class="skill-items">
-          <span class="skill-item">Stochastic Modeling</span>
-          <span class="skill-item">Itô Calculus</span>
-          <span class="skill-item">Optimization</span>
-          <span class="skill-item">Operations Research</span>
-          <span class="skill-item">Numerical Analysis</span>
-          <span class="skill-item">Fuzzy Logic</span>
-        </div>
+      <div class="skill-col">
+        <div class="skill-col-title">Applied Mathematics</div>
+        <ul>
+          <li>Probability Theory</li><li>Differential Equations</li>
+          <li>Advanced Calculus</li><li>Linear Algebra</li>
+          <li>Mathematical Analysis</li><li>Itô Calculus / SDEs</li>
+        </ul>
       </div>
-      <div class="skill-cell">
-        <div class="skill-cell-label">Business & Management</div>
-        <div class="skill-items">
-          <span class="skill-item">Management Science</span>
-          <span class="skill-item">Financial Analysis</span>
-          <span class="skill-item">Project Management</span>
-          <span class="skill-item">Statistical Inference</span>
-          <span class="skill-item">Strategic Research</span>
-        </div>
+      <div class="skill-col">
+        <div class="skill-col-title">Quantitative Methods</div>
+        <ul>
+          <li>Stochastic Modeling</li><li>Optimization</li>
+          <li>Operations Research</li><li>Numerical Analysis</li>
+          <li>Fuzzy Logic</li><li>Statistical Inference</li>
+        </ul>
+      </div>
+      <div class="skill-col">
+        <div class="skill-col-title">Business & Management</div>
+        <ul>
+          <li>Management Science</li><li>Financial Modeling</li>
+          <li>Project Management</li><li>Strategic Research</li>
+          <li>KPI Analysis</li><li>Competitive Analysis</li>
+        </ul>
       </div>
     </div>
   </div>
+</section>
 
-  <!-- FOOTER -->
-  <div class="footer">
-    <span class="footer-left">okantekoglu10@gmail.com · Istanbul, Türkiye</span>
-    <span class="footer-right">Mathematical Engineering, YTU · 2026</span>
+<!-- FOOTER -->
+<footer class="footer-bar">
+  <span class="footer-name">Okan Tekoğlu</span>
+  <div class="footer-links">
+    <a href="https://github.com/okantekoglu" target="_blank">GitHub</a>
+    <a href="https://linkedin.com/in/okantekoglu" target="_blank">LinkedIn</a>
+    <a href="mailto:okantekoglu10@gmail.com">Email</a>
+    <a href="Okan_Tekoglu_CV.pdf" target="_blank">Download CV</a>
   </div>
-
-</div>
+  <span class="footer-copy">Istanbul, Türkiye · 2026</span>
+</footer>
 
 <script>
   document.addEventListener('DOMContentLoaded', function () {
-
-    // Tab switching
-    document.querySelectorAll('.nav-btn').forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        var id = btn.getAttribute('data-tab');
-        document.querySelectorAll('.panel').forEach(function (p) { p.classList.remove('active'); });
-        document.querySelectorAll('.nav-btn').forEach(function (b) { b.classList.remove('active'); });
-        document.getElementById('tab-' + id).classList.add('active');
-        btn.classList.add('active');
-      });
-    });
-
-    // Project expand/collapse
     document.querySelectorAll('[data-project]').forEach(function (row) {
       row.querySelector('.project-summary').addEventListener('click', function () {
         var isOpen = row.classList.contains('open');
-        // Close all others
         document.querySelectorAll('[data-project]').forEach(function (r) { r.classList.remove('open'); });
-        if (!isOpen) { row.classList.add('open'); }
+        if (!isOpen) row.classList.add('open');
       });
     });
-
   });
 </script>
 </body>
