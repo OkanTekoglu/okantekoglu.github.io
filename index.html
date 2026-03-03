@@ -41,10 +41,11 @@
     z-index: 0;
   }
 
+  /* ── HEADER ── */
   header {
     position: relative;
     z-index: 10;
-    padding: 72px 60px 48px;
+    padding: 72px 60px 0;
     max-width: 960px;
     margin: 0 auto;
   }
@@ -103,6 +104,18 @@
   }
   .header-links a:hover { color: var(--accent); border-color: var(--accent); }
 
+  /* Short bio between links and tabs */
+  .header-bio {
+    margin-top: 28px;
+    font-size: 14.5px;
+    line-height: 1.75;
+    color: var(--muted);
+    max-width: 680px;
+    opacity: 0;
+    animation: fadeUp 0.6s 0.35s ease forwards;
+  }
+
+  /* ── TABS ── */
   .tabs-wrapper {
     max-width: 960px;
     margin: 0 auto;
@@ -116,6 +129,7 @@
   .tab-nav {
     display: flex;
     border-bottom: 1px solid var(--border);
+    margin-top: 36px;
     margin-bottom: 52px;
     overflow-x: auto;
     scrollbar-width: none;
@@ -154,7 +168,7 @@
   .tab-panel { display: none; }
   .tab-panel.active { display: block; }
 
-  /* ABOUT */
+  /* ── ABOUT ── */
   .about-grid {
     display: grid;
     grid-template-columns: 3fr 2fr;
@@ -162,31 +176,55 @@
     align-items: start;
   }
 
-  .about-text p {
-    font-size: 16px;
-    line-height: 1.85;
-    color: #c0c0d4;
-    margin-bottom: 20px;
-  }
-  .about-text strong { color: var(--gold); font-weight: 600; }
-
-  .interests-grid {
-    margin-top: 28px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-  .tag {
+  /* Experience list inside About */
+  .aexp-title {
     font-family: 'JetBrains Mono', monospace;
     font-size: 10px;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: var(--accent2);
-    border: 1px solid rgba(167,139,250,0.25);
-    padding: 5px 10px;
-    transition: background 0.2s, border-color 0.2s;
+    color: var(--dim);
+    margin-bottom: 24px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
   }
-  .tag:hover { background: rgba(167,139,250,0.08); border-color: rgba(167,139,250,0.5); }
+
+  .aexp-item { margin-bottom: 28px; }
+
+  .aexp-date {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--dim);
+    margin-bottom: 4px;
+  }
+
+  .aexp-role {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 2px;
+  }
+
+  .aexp-company {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 10px;
+  }
+
+  .aexp-bullets { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+  .aexp-bullets li {
+    font-size: 13.5px;
+    line-height: 1.7;
+    color: var(--muted);
+    padding-left: 16px;
+    position: relative;
+  }
+  .aexp-bullets li::before { content: '—'; position: absolute; left: 0; color: var(--dim); font-size: 12px; }
 
   /* Edu sidebar */
   .edu-sidebar { display: flex; flex-direction: column; gap: 18px; }
@@ -234,8 +272,9 @@
     line-height: 1.6;
   }
 
-  .cert-block { }
-  .cert-title {
+  /* Certifications */
+  .cert-section { margin-top: 4px; }
+  .cert-section-title {
     font-family: 'JetBrains Mono', monospace;
     font-size: 10px;
     letter-spacing: 0.15em;
@@ -246,16 +285,29 @@
     border-bottom: 1px solid var(--border);
   }
   .cert-list { display: flex; flex-direction: column; gap: 6px; }
-  .cert-item {
+  a.cert-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
     font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
+    font-size: 10.5px;
     color: var(--muted);
-    padding-left: 12px;
-    position: relative;
+    text-decoration: none;
+    padding: 7px 10px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    transition: all 0.15s;
   }
-  .cert-item::before { content: '·'; position: absolute; left: 0; color: var(--dim); }
+  a.cert-item:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: rgba(126,184,247,0.05);
+  }
+  .cert-icon { opacity: 0.4; font-size: 10px; flex-shrink: 0; }
+  a.cert-item:hover .cert-icon { opacity: 1; }
 
-  /* PROJECTS */
+  /* ── PROJECTS ── */
   .project-card {
     background: var(--surface);
     border: 1px solid var(--border);
@@ -282,7 +334,7 @@
     justify-content: space-between;
     align-items: flex-start;
     gap: 16px;
-    margin-bottom: 10px;
+    margin-bottom: 6px;
   }
   .project-title {
     font-family: 'Playfair Display', serif;
@@ -302,6 +354,14 @@
     background: rgba(226,201,126,0.05);
     margin-top: 2px;
     flex-shrink: 0;
+  }
+  .project-insight {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.03em;
+    margin-bottom: 8px;
+    opacity: 0.8;
   }
   .project-desc {
     font-size: 14px;
@@ -349,7 +409,7 @@
     pointer-events: none;
   }
 
-  /* EXPERIENCE */
+  /* ── EXPERIENCE TAB ── */
   .exp-timeline { position: relative; }
   .exp-timeline::before {
     content: '';
@@ -401,7 +461,7 @@
   }
   .exp-bullets li::before { content: '—'; position: absolute; left: 0; color: var(--dim); font-size: 12px; }
 
-  /* SKILLS */
+  /* ── SKILLS & MORE ── */
   .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
   .skill-group {
     background: var(--surface);
@@ -409,6 +469,7 @@
     padding: 20px 24px;
     transition: border-color 0.2s;
   }
+  .skill-group.full { grid-column: span 2; }
   .skill-group:hover { border-color: #2e2e48; }
   .skill-group-title {
     font-family: 'JetBrains Mono', monospace;
@@ -417,6 +478,8 @@
     text-transform: uppercase;
     color: var(--gold);
     margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
   }
   .skill-list { display: flex; flex-wrap: wrap; gap: 7px; }
   .skill-pill {
@@ -432,6 +495,34 @@
     background: rgba(126,184,247,0.06);
     border-color: rgba(126,184,247,0.3);
     color: var(--accent);
+  }
+  .act-pill {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    background: rgba(167,139,250,0.05);
+    border: 1px solid rgba(167,139,250,0.15);
+    padding: 5px 11px;
+    transition: all 0.15s;
+  }
+  .act-pill:hover { background: rgba(167,139,250,0.1); color: var(--accent2); }
+  .ach-pill {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    background: rgba(226,201,126,0.05);
+    border: 1px solid rgba(226,201,126,0.15);
+    padding: 5px 11px;
+    transition: all 0.15s;
+  }
+  .ach-pill:hover { background: rgba(226,201,126,0.1); color: var(--gold); }
+  .hobby-pill {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    background: rgba(126,184,247,0.04);
+    border: 1px solid var(--border);
+    padding: 5px 11px;
   }
 
   footer {
@@ -455,15 +546,18 @@
   }
 
   @media (max-width: 700px) {
-    header, .tabs-wrapper { padding-left: 24px; padding-right: 24px; }
+    header { padding: 40px 24px 0; }
+    .tabs-wrapper { padding-left: 24px; padding-right: 24px; }
     .about-grid { grid-template-columns: 1fr; }
     .skills-grid { grid-template-columns: 1fr; }
+    .skill-group.full { grid-column: span 1; }
     footer { flex-direction: column; gap: 8px; text-align: center; padding: 24px; }
   }
 </style>
 </head>
 <body>
 
+<!-- ── HEADER ── -->
 <header>
   <div class="eyebrow">Mathematical Engineering · Istanbul</div>
   <h1>Okan <em>Tekoğlu</em></h1>
@@ -474,54 +568,90 @@
     <a href="https://github.com/okantekoglu" target="_blank">↗ GitHub</a>
     <a href="https://linkedin.com/in/okantekoglu" target="_blank">↗ LinkedIn</a>
     <a href="Okan_Tekoglu_CV.pdf" target="_blank">↗ Download CV</a>
-    <a href="/cdn-cgi/l/email-protection#701f1b111e04151b1f171c05414030171d11191c5e131f1d">↗ Contact</a>
+    <a href="/cdn-cgi/l/email-protection#c7a8aca6a9b3a2aca8a0abb2f6f787a0aaa6aeabe9a4a8aa">↗ Contact</a>
+  </div>
+
+  <div class="header-bio">
+    Final-year Mathematical Engineering student at Yıldız Technical University with a focus on applied mathematics, especially probability and statistics. Gained practical experience in AI research, data science, business development, and project management. Interested in roles related to data science, quantitative analysis, machine learning, and management sciences.
   </div>
 </header>
 
+<!-- ── TABS WRAPPER ── -->
 <div class="tabs-wrapper">
   <nav class="tab-nav">
     <button class="tab-btn active" data-tab="about">About</button>
     <button class="tab-btn" data-tab="projects">Projects</button>
-    <button class="tab-btn" data-tab="experience">Experience</button>
-    <button class="tab-btn" data-tab="skills">Skills</button>
+    <button class="tab-btn" data-tab="skills">Skills & More</button>
   </nav>
 
-  <!-- ABOUT -->
+  <!-- ── ABOUT ── -->
   <div id="tab-about" class="tab-panel active">
     <div class="about-grid">
 
+      <!-- Left: experience in About -->
       <div>
-        <div class="about-text">
-          <p>I'm a final-year Mathematical Engineering student at Yıldız Technical University, with a focus on <strong>data science, data management, and quantitative analysis</strong>.</p>
-          <p>My background spans stochastic modeling, financial mathematics, optimization, and machine learning — grounded in a rigorous mathematical foundation covering probability, differential equations, advanced calculus, and linear algebra. I'm drawn to problems where mathematical thinking meets real-world, messy data.</p>
-          <p>Alongside technical work, I've gained experience in <strong>strategy, business development, and project management</strong> — and I'm interested in roles at the intersection of <strong>management science, data management, and quantitative decision-making</strong>.</p>
+        <div class="aexp-title">Experience</div>
+
+        <div class="aexp-item">
+          <div class="aexp-date">Jan 2026 – Present</div>
+          <div class="aexp-role">Strategy & Business Development Intern</div>
+          <div class="aexp-company">Turkcell — Telecommunications & Digital Services</div>
+          <ul class="aexp-bullets">
+            <li>Researched connectivity, satellite technologies, and digital service trends to support strategic planning.</li>
+            <li>Investigated e-SIM and MVNO business models; analyzed competitive positioning in the Turkish telecom market.</li>
+            <li>Prepared competitive landscape summaries and benchmarking analyses; tracked KPIs against industry standards.</li>
+          </ul>
         </div>
-        <div class="interests-grid">
-          <span class="tag">Data Science</span>
-          <span class="tag">Data Management</span>
-          <span class="tag">Management Science</span>
-          <span class="tag">Applied Mathematics</span>
-          <span class="tag">Financial Analysis</span>
-          <span class="tag">Stochastic Modeling</span>
-          <span class="tag">Optimization</span>
-          <span class="tag">Machine Learning</span>
-          <span class="tag">Explainable AI</span>
-          <span class="tag">Quantitative Methods</span>
+
+        <div class="aexp-item">
+          <div class="aexp-date">Aug – Oct 2025</div>
+          <div class="aexp-role">Data Science & Analytics Intern</div>
+          <div class="aexp-company">FetalIST — Healthcare AI</div>
+          <ul class="aexp-bullets">
+            <li>Built ML pipelines for segmentation and analysis on real clinical imaging data.</li>
+            <li>Designed data collection, cleaning, and preprocessing workflows for large-scale datasets with quality assurance protocols.</li>
+          </ul>
+        </div>
+
+        <div class="aexp-item">
+          <div class="aexp-date">Jun – Jul 2025</div>
+          <div class="aexp-role">Project Management Intern</div>
+          <div class="aexp-company">TNC Group — Management Consulting</div>
+          <ul class="aexp-bullets">
+            <li>Supported project planning, timeline tracking, and stakeholder communication across consulting engagements.</li>
+          </ul>
+        </div>
+
+        <div class="aexp-item">
+          <div class="aexp-date">Mar – Jun 2024</div>
+          <div class="aexp-role">Youth Senate Member</div>
+          <div class="aexp-company">Anadolu Sigorta — Insurance & Risk Management</div>
+          <ul class="aexp-bullets">
+            <li>Gained exposure to insurance principles and risk management frameworks through structured industry workshops.</li>
+          </ul>
+        </div>
+
+        <div class="aexp-item">
+          <div class="aexp-date">2021 – Present</div>
+          <div class="aexp-role">Mathematics Tutor</div>
+          <div class="aexp-company">Independent</div>
         </div>
       </div>
 
+      <!-- Right: education + certs -->
       <div class="edu-sidebar">
+
         <div class="edu-card">
           <div class="edu-card-degree">B.Sc. Mathematical Engineering</div>
-          <div class="edu-card-school">Yıldız Technical University · 2026</div>
-          <div class="edu-card-desc">Numerical Analysis · Optimization · Operations Research · Financial Mathematics · Probability Theory · Differential Equations · Mathematical Analysis · Advanced Calculus · Linear Algebra · Statistics · Machine Learning</div>
-          <div class="edu-card-thesis"><strong style="color:var(--gold)">Thesis:</strong> Dynamic Portfolio Optimization Using Reinforcement Learning — deep RL agents on real market data.</div>
+          <div class="edu-card-school">Yıldız Technical University · Expected 2026</div>
+          <div class="edu-card-desc">Probability Theory · Differential Equations · Mathematical Analysis · Advanced Calculus · Algebra · Numerical Analysis · Optimization · Operations Research · Financial Mathematics · Statistics · Machine Learning · C++</div>
+          <div class="edu-card-thesis"><strong style="color:var(--gold)">Thesis:</strong> Dynamic Portfolio Optimization Using Reinforcement Learning — deep RL agents applied to real market data.</div>
         </div>
 
         <div class="edu-card">
           <div class="edu-card-degree">Stochastic Analysis Summer School</div>
           <div class="edu-card-school">CIMPA – European Mathematical Society</div>
-          <div class="edu-card-desc">Brownian Motion · Itô Calculus · SDEs · Martingale Theory · Mathematical Finance</div>
+          <div class="edu-card-desc">Brownian Motion · Itô Calculus · Martingale Theory · SDEs · Mathematical Finance</div>
         </div>
 
         <div class="edu-card">
@@ -530,23 +660,41 @@
           <div class="edu-card-desc">Full-immersion English program in Dublin, Ireland.</div>
         </div>
 
-        <div class="cert-block">
-          <div class="cert-title">Certifications & Achievements</div>
+        <div class="cert-section">
+          <div class="cert-section-title">Certifications</div>
           <div class="cert-list">
-            <span class="cert-item">Google AI Technology Academy (2024–2025)</span>
-            <span class="cert-item">Google Project Management Certificate</span>
-            <span class="cert-item">Deep Learning — MATLAB</span>
-            <span class="cert-item">Google Datathon Participant</span>
-            <span class="cert-item">NASA URC Finalist · Teknofest Finalist</span>
-            <span class="cert-item">Yıldız Best Award</span>
+            <a href="cert_google_ai_academy.pdf" target="_blank" class="cert-item">
+              <span>Google AI Technology Academy</span>
+              <span class="cert-icon">↗ PDF</span>
+            </a>
+            <a href="cert_cimpa.pdf" target="_blank" class="cert-item">
+              <span>CIMPA-EMS Stochastic Analysis</span>
+              <span class="cert-icon">↗ PDF</span>
+            </a>
+            <a href="cert_deep_learning_matlab.pdf" target="_blank" class="cert-item">
+              <span>Deep Learning – MATLAB</span>
+              <span class="cert-icon">↗ PDF</span>
+            </a>
+            <a href="cert_ml_health_btk.pdf" target="_blank" class="cert-item">
+              <span>Machine Learning for Health – BTK</span>
+              <span class="cert-icon">↗ PDF</span>
+            </a>
+            <a href="cert_data_science_btk.pdf" target="_blank" class="cert-item">
+              <span>Data Science – BTK Academy</span>
+              <span class="cert-icon">↗ PDF</span>
+            </a>
+            <a href="cert_google_datathon.pdf" target="_blank" class="cert-item">
+              <span>Google Datathon – Participant</span>
+              <span class="cert-icon">↗ PDF</span>
+            </a>
           </div>
         </div>
-      </div>
 
+      </div>
     </div>
   </div>
 
-  <!-- PROJECTS -->
+  <!-- ── PROJECTS ── -->
   <div id="tab-projects" class="tab-panel">
 
     <div class="project-card">
@@ -554,28 +702,30 @@
         <div class="project-title">Dynamic Portfolio Optimization via Reinforcement Learning</div>
         <div class="project-domain">Finance · RL</div>
       </div>
-      <div class="project-desc">BSc thesis. Applying deep RL agents (PPO, DQN) to dynamically optimize financial portfolio allocation under real market conditions. The agent learns rebalancing strategies by interacting with a market environment built from historical data.</div>
+      <div class="project-insight">Built end-to-end: applying deep RL to real financial market optimization.</div>
+      <div class="project-desc">BSc thesis. Deep RL agents (PPO, DQN) dynamically optimize portfolio allocation under real market conditions, learning rebalancing strategies from historical data.</div>
       <div class="project-footer">
         <div class="project-stack">
           <span class="stack-tag">Python</span><span class="stack-tag">PyTorch</span>
           <span class="stack-tag">Reinforcement Learning</span><span class="stack-tag">Financial Time Series</span>
         </div>
-        <a href="#" class="project-link coming">↗ Documentation</a>
+        <a href="doc_portfolio_rl.pdf" target="_blank" class="project-link coming">↗ Documentation</a>
       </div>
     </div>
 
     <div class="project-card">
       <div class="project-header">
-        <div class="project-title">Inflation Modeling via Mamdani Fuzzy Logic</div>
-        <div class="project-domain">Financial Analysis</div>
+        <div class="project-title">Mars Rover Vehicle — NASA University Rover Challenge</div>
+        <div class="project-domain">Robotics · Engineering</div>
       </div>
-      <div class="project-desc">Examined the effects of exchange rate variability, interest rates, and credit usage on inflation using a Mamdani-type Fuzzy Inference System. Captured non-linear macroeconomic relationships without parametric assumptions on real data.</div>
+      <div class="project-insight">Contributed to a multidisciplinary team building an autonomous rover for international competition.</div>
+      <div class="project-desc">Part of the Yıldız Rover Team developing an autonomous Mars rover for the URC. Contributed to team coordination, logistics, and operational support throughout competition preparation. Earned the University Rover Challenge certificate as a NASA URC Finalist.</div>
       <div class="project-footer">
         <div class="project-stack">
-          <span class="stack-tag">Python</span><span class="stack-tag">MATLAB</span>
-          <span class="stack-tag">Fuzzy Logic</span><span class="stack-tag">Macroeconomic Modeling</span>
+          <span class="stack-tag">Autonomous Systems</span><span class="stack-tag">Multidisciplinary Engineering</span>
+          <span class="stack-tag">Team Coordination</span>
         </div>
-        <a href="#" class="project-link coming">↗ Documentation</a>
+        <a href="doc_mars_rover.pdf" target="_blank" class="project-link coming">↗ Documentation</a>
       </div>
     </div>
 
@@ -584,13 +734,14 @@
         <div class="project-title">Predictive Screening — Stress Risk Classification</div>
         <div class="project-domain">Data Science</div>
       </div>
-      <div class="project-desc">End-to-end classification pipeline on real-world socioeconomic and life-course data. Full flow: preprocessing, visualization, model training, evaluation, and explainability analysis using SHAP &amp; LIME.</div>
+      <div class="project-insight">Designed and built: turning socioeconomic data into interpretable risk signals.</div>
+      <div class="project-desc">End-to-end classification pipeline on real-world socioeconomic and life-course data. Full flow: preprocessing, visualization, model training, evaluation, and explainability via SHAP &amp; LIME.</div>
       <div class="project-footer">
         <div class="project-stack">
           <span class="stack-tag">Python</span><span class="stack-tag">Random Forest</span>
           <span class="stack-tag">SHAP</span><span class="stack-tag">LIME</span><span class="stack-tag">Scikit-learn</span>
         </div>
-        <a href="#" class="project-link coming">↗ Documentation</a>
+        <a href="doc_stress_risk.pdf" target="_blank" class="project-link coming">↗ Documentation</a>
       </div>
     </div>
 
@@ -599,13 +750,14 @@
         <div class="project-title">Mortality Prediction — Supervised Learning on Clinical Data</div>
         <div class="project-domain">Applied ML · Data Management</div>
       </div>
-      <div class="project-desc">Full supervised learning pipeline on real clinical datasets: data definition, visualization, preprocessing, feature selection, hyperparameter optimization, and evaluation. Multiple algorithms benchmarked for high-stakes outcome prediction.</div>
+      <div class="project-insight">Designed and delivered: full pipeline for high-stakes prediction on real patient data.</div>
+      <div class="project-desc">Full supervised learning pipeline on real clinical datasets: data definition, visualization, preprocessing, feature selection, hyperparameter optimization, and evaluation. Multiple algorithms benchmarked.</div>
       <div class="project-footer">
         <div class="project-stack">
           <span class="stack-tag">Python</span><span class="stack-tag">Scikit-learn</span>
           <span class="stack-tag">Feature Selection</span><span class="stack-tag">Data Preprocessing</span>
         </div>
-        <a href="#" class="project-link coming">↗ Documentation</a>
+        <a href="doc_mortality.pdf" target="_blank" class="project-link coming">↗ Documentation</a>
       </div>
     </div>
 
@@ -614,13 +766,14 @@
         <div class="project-title">Unsupervised Learning on Large-Scale Data</div>
         <div class="project-domain">Data Management · Clustering</div>
       </div>
+      <div class="project-insight">Built the pipeline: extracting structure from high-volume, high-dimensional real-world data.</div>
       <div class="project-desc">Applied clustering methods to a large-scale, high-dimensional real-world dataset. Extracted statistically meaningful group structures to support downstream analysis and decision-making.</div>
       <div class="project-footer">
         <div class="project-stack">
           <span class="stack-tag">Python</span><span class="stack-tag">K-means</span>
           <span class="stack-tag">DBSCAN</span><span class="stack-tag">Large-Scale Data</span>
         </div>
-        <a href="#" class="project-link coming">↗ Documentation</a>
+        <a href="doc_unsupervised.pdf" target="_blank" class="project-link coming">↗ Documentation</a>
       </div>
     </div>
 
@@ -629,127 +782,114 @@
         <div class="project-title">Fetal MRI Image Processing Pipeline</div>
         <div class="project-domain">Computer Vision · AI</div>
       </div>
-      <div class="project-desc">End-to-end image analysis pipeline covering vessel-enhancing filters, topological data analysis, point cloud investigation, CNN-based model training, and explainability via SHAP &amp; LIME on real clinical imagery.</div>
+      <div class="project-insight">Built from scratch: raw clinical imagery to explainable model outputs.</div>
+      <div class="project-desc">End-to-end image analysis pipeline: vessel-enhancing filters, topological data analysis (TDA), point cloud investigation, CNN-based model training, and SHAP &amp; LIME explainability on real clinical imagery.</div>
       <div class="project-footer">
         <div class="project-stack">
           <span class="stack-tag">Python</span><span class="stack-tag">CNN</span>
           <span class="stack-tag">TDA</span><span class="stack-tag">SHAP</span><span class="stack-tag">LIME</span>
         </div>
-        <a href="#" class="project-link coming">↗ Documentation</a>
+        <a href="doc_fetal_mri.pdf" target="_blank" class="project-link coming">↗ Documentation</a>
       </div>
     </div>
 
   </div>
 
-  <!-- EXPERIENCE -->
-  <div id="tab-experience" class="tab-panel">
-    <div class="exp-timeline">
-
-      <div class="exp-item">
-        <div class="exp-date">Jan 2026 – Present</div>
-        <div class="exp-role">Strategy &amp; Business Development Intern</div>
-        <div class="exp-company">Turkcell — Telecommunications &amp; Digital Services</div>
-        <ul class="exp-bullets">
-          <li>Conducted market and technology research on connectivity, satellite technologies, and digital service trends to support strategic planning.</li>
-          <li>Prepared competitive landscape summaries; performed benchmarking analyses and tracked KPIs against industry standards.</li>
-        </ul>
+    <div class="project-card">
+      <div class="project-header">
+        <div class="project-title">Inflation Modeling via Mamdani Fuzzy Logic</div>
+        <div class="project-domain">Financial Analysis</div>
       </div>
-
-      <div class="exp-item">
-        <div class="exp-date">Aug 2025 – Oct 2025</div>
-        <div class="exp-role">Data Science &amp; Analytics Intern</div>
-        <div class="exp-company">FetalIST — Healthcare AI</div>
-        <ul class="exp-bullets">
-          <li>Built ML pipelines for segmentation and analysis on real clinical imaging data.</li>
-          <li>Designed data collection, cleaning, and preprocessing workflows for large-scale datasets with quality assurance protocols.</li>
-        </ul>
+      <div class="project-insight">Built and applied: modeling non-linear macroeconomic relationships without parametric assumptions.</div>
+      <div class="project-desc">Examined the effects of exchange rate variability, interest rates, and credit usage on inflation using a Mamdani-type Fuzzy Inference System on real Turkish macroeconomic data.</div>
+      <div class="project-footer">
+        <div class="project-stack">
+          <span class="stack-tag">Python</span><span class="stack-tag">MATLAB</span>
+          <span class="stack-tag">Fuzzy Logic</span><span class="stack-tag">Macroeconomic Modeling</span>
+        </div>
+        <a href="doc_fuzzy_inflation.pdf" target="_blank" class="project-link coming">↗ Documentation</a>
       </div>
-
-      <div class="exp-item">
-        <div class="exp-date">Jun 2025 – Jul 2025</div>
-        <div class="exp-role">Project Management Intern</div>
-        <div class="exp-company">TNC Group — Management Consulting</div>
-        <ul class="exp-bullets">
-          <li>Supported project planning, timeline tracking, and stakeholder communication across consulting engagements.</li>
-        </ul>
-      </div>
-
-      <div class="exp-item">
-        <div class="exp-date">Mar 2024 – Jun 2024</div>
-        <div class="exp-role">Youth Senate Member</div>
-        <div class="exp-company">Anadolu Sigorta — Insurance &amp; Risk Management</div>
-        <ul class="exp-bullets">
-          <li>Gained exposure to insurance industry principles and risk management frameworks through structured workshops.</li>
-        </ul>
-      </div>
-
-      <div class="exp-item">
-        <div class="exp-date">2021 – Present</div>
-        <div class="exp-role">Mathematics Tutor</div>
-        <div class="exp-company">Independent</div>
-        <ul class="exp-bullets">
-          <li>Ongoing private tutoring in mathematics — translating complex concepts into clear, structured explanations for diverse learners.</li>
-        </ul>
-      </div>
-
     </div>
-  </div>
 
-  <!-- SKILLS -->
+
+  <!-- ── SKILLS & MORE ── -->
   <div id="tab-skills" class="tab-panel">
     <div class="skills-grid">
+
       <div class="skill-group">
         <div class="skill-group-title">Programming</div>
         <div class="skill-list">
           <span class="skill-pill">Python</span>
           <span class="skill-pill">MATLAB</span>
           <span class="skill-pill">SQL</span>
+          <span class="skill-pill">C++</span>
+          <span class="skill-pill">Object-Oriented Programming</span>
         </div>
       </div>
-      <div class="skill-group">
-        <div class="skill-group-title">ML / AI Frameworks</div>
+
+
+      <div class="skill-group full">
+        <div class="skill-group-title">ML / AI & Data</div>
         <div class="skill-list">
           <span class="skill-pill">PyTorch</span>
           <span class="skill-pill">TensorFlow</span>
           <span class="skill-pill">Scikit-learn</span>
-        </div>
-      </div>
-      <div class="skill-group">
-        <div class="skill-group-title">Data & Analysis</div>
-        <div class="skill-list">
+          <span class="skill-pill">Deep Learning</span>
+          <span class="skill-pill">Computer Vision</span>
+          <span class="skill-pill">Image Processing</span>
+          <span class="skill-pill">Reinforcement Learning</span>
+          <span class="skill-pill">Explainable AI (SHAP / LIME)</span>
           <span class="skill-pill">NumPy</span>
           <span class="skill-pill">Pandas</span>
           <span class="skill-pill">Matplotlib</span>
           <span class="skill-pill">Jupyter</span>
         </div>
       </div>
-      <div class="skill-group">
-        <div class="skill-group-title">Applied Mathematics</div>
-        <div class="skill-list">
-          <span class="skill-pill">Probability Theory</span>
-          <span class="skill-pill">Stochastic Modeling</span>
-          <span class="skill-pill">Differential Equations</span>
-          <span class="skill-pill">Mathematical Analysis</span>
-          <span class="skill-pill">Advanced Calculus</span>
-          <span class="skill-pill">Linear Algebra</span>
-          <span class="skill-pill">Itô Calculus</span>
-          <span class="skill-pill">Optimization</span>
-          <span class="skill-pill">Operations Research</span>
-          <span class="skill-pill">Numerical Analysis</span>
-          <span class="skill-pill">Fuzzy Logic</span>
-        </div>
-      </div>
+
       <div class="skill-group">
         <div class="skill-group-title">Core Competencies</div>
         <div class="skill-list">
           <span class="skill-pill">Statistical Inference</span>
-          <span class="skill-pill">Explainable AI</span>
           <span class="skill-pill">Feature Engineering</span>
           <span class="skill-pill">Data Management</span>
           <span class="skill-pill">Financial Modeling</span>
           <span class="skill-pill">Management Science</span>
         </div>
       </div>
+
+      <div class="skill-group full">
+        <div class="skill-group-title">Mathematics Village — Summer Programs (2023 · 2024 · 2025)</div>
+        <div class="skill-list">
+          <span class="act-pill">Theoretical AI Courses</span>
+          <span class="act-pill">Social & Humanities Sciences Courses</span>
+          <span class="act-pill">Art Courses</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-group-title">Achievements</div>
+        <div class="skill-list">
+          <span class="ach-pill">NASA URC Finalist</span>
+          <span class="ach-pill">Teknofest Finalist</span>
+          <span class="ach-pill">Yıldız Best Award</span>
+          <span class="ach-pill">Google Datathon Participant</span>
+          <span class="ach-pill">Mathematics Festival 2024 — Organizer Team</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-group-title">Hobbies & Activities</div>
+        <div class="skill-list">
+          <span class="hobby-pill">🎸 Guitar</span>
+          <span class="hobby-pill">🏊 Swimming</span>
+          <span class="hobby-pill">🎾 Tennis</span>
+          <span class="hobby-pill">Mathematics Tutoring</span>
+          <span class="hobby-pill">YTU SPARK — Member</span>
+          <span class="hobby-pill">YTU Photography Club</span>
+          <span class="hobby-pill">YTU Camping Club</span>
+        </div>
+      </div>
+
       <div class="skill-group">
         <div class="skill-group-title">Languages</div>
         <div class="skill-list">
@@ -757,13 +897,14 @@
           <span class="skill-pill">English — Professional</span>
         </div>
       </div>
+
     </div>
   </div>
 
 </div>
 
 <footer>
-  <span>Okan Tekoğlu · <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="610e0a000f15040a0e060d14505121060c00080d4f020e0c">[email&#160;protected]</a></span>
+  <span>Okan Tekoğlu · <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="325d59535c4657595d555e47030272555f535b5e1c515d5f">[email&#160;protected]</a></span>
   <span>Istanbul, Türkiye</span>
 </footer>
 <script>
